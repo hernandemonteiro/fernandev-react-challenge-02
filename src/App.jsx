@@ -35,6 +35,11 @@ export default function LoginForm() {
       });
   }
 
+  // adicional pessoal ao clicar enter em algum dos inputs;
+  function handleKeyDown(event) {
+    if ((event.key === "Enter") & !checkStatesToDisableButton) handleSubmit();
+  }
+
   function clearAuthError() {
     setAuthError("");
   }
@@ -53,6 +58,7 @@ export default function LoginForm() {
             type={"email"}
             onChange={(e) => setEmail(e.target.value)}
             onFocus={clearAuthError}
+            onKeyPress={handleKeyDown}
             value={email}
             autoComplete="off"
           />
@@ -64,14 +70,13 @@ export default function LoginForm() {
             type={"password"}
             onChange={(e) => setPassword(e.target.value)}
             onFocus={clearAuthError}
+            onKeyPress={handleKeyDown}
             value={password}
           />
         </div>
 
         <div className="button">
-          <button disabled={checkStatesToDisableButton} onClick={handleSubmit}>
-            Login
-          </button>
+          <button disabled={checkStatesToDisableButton}>Login</button>
         </div>
       </div>
     </div>
